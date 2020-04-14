@@ -138,11 +138,11 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
         searchBarColor = array.getColor(R.styleable.MaterialSearchBar_mt_searchBarColor, ContextCompat.getColor(getContext(), R.color.searchBarPrimaryColor));
 
         //Icon Related Attributes
-        navIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_navIconDrawable, R.drawable.ic_menu_animated);
+        navIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_navIconDrawable, R.drawable.ic_menu_black_24dp);
         menuIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_menuIconDrawable, R.drawable.ic_dots_vertical_black_48dp);
         searchIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_searchIconDrawable, R.drawable.ic_magnify_black_48dp);
-        speechIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_speechIconDrawable, R.drawable.ic_microphone_black_48dp);
-        arrowIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_backIconDrawable, R.drawable.ic_arrow_left_black_48dp);
+        speechIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_speechIconDrawable, R.drawable.ic_arrow_left_black_48dp);
+        arrowIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_backIconDrawable, R.drawable.ic_arrow_back_black_24dp);
         clearIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_clearIconDrawable, R.drawable.ic_close_black_48dp);
         navIconTint = array.getColor(R.styleable.MaterialSearchBar_mt_navIconTint, ContextCompat.getColor(getContext(), R.color.searchBarNavIconTintColor));
         menuIconTint = array.getColor(R.styleable.MaterialSearchBar_mt_menuIconTint, ContextCompat.getColor(getContext(), R.color.searchBarMenuIconTintColor));
@@ -323,8 +323,6 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
     //Setup Icon Colors And Drawables
     private void setupIcons() {
         //Drawables
-        //Animated Nav Icon
-        navIconRes = R.drawable.ic_menu_animated;
         this.navIcon.setImageResource(navIconRes);
         setNavButtonEnabled(navButtonEnabled);
 
@@ -422,7 +420,7 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
      * Hides search input and close arrow
      */
     public void closeSearch() {
-        animateNavIcon(false);
+        this.navIcon.setImageResource(navIconRes);
         searchOpened = false;
         Animation out = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
         Animation in = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in_right);
@@ -449,7 +447,7 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
             searchEdit.requestFocus();
             return;
         }
-        animateNavIcon(true);
+        this.navIcon.setImageResource(arrowIconRes);
         adapter.notifyDataSetChanged();
         searchOpened = true;
         Animation left_in = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in_left);
@@ -464,7 +462,7 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
         searchIcon.startAnimation(left_out);
     }
 
-    private void animateNavIcon(boolean menuState) {
+/*    private void animateNavIcon(boolean menuState) {
         if (menuState) {
             this.navIcon.setImageResource(R.drawable.ic_menu_animated);
         } else {
@@ -474,7 +472,7 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
         if (mDrawable instanceof Animatable) {
             ((Animatable) mDrawable).start();
         }
-    }
+    }*/
 
     private void animateSuggestions(int from, int to) {
         suggestionsVisible = to > 0;

@@ -100,7 +100,6 @@
                 android:id="@+id/mt_nav"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="?selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
                 android:scaleType="center"
