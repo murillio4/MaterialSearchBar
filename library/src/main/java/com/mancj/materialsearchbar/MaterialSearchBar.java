@@ -73,7 +73,7 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
 
     private PopupMenu popupMenu;
 
-    private int navIconResId;
+    private int navIconRes;
     private int menuIconRes;
     private int searchIconRes;
     private int speechIconRes;
@@ -138,6 +138,7 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
         searchBarColor = array.getColor(R.styleable.MaterialSearchBar_mt_searchBarColor, ContextCompat.getColor(getContext(), R.color.searchBarPrimaryColor));
 
         //Icon Related Attributes
+        navIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_navIconDrawable, R.drawable.ic_menu_animated);
         menuIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_menuIconDrawable, R.drawable.ic_dots_vertical_black_48dp);
         searchIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_searchIconDrawable, R.drawable.ic_magnify_black_48dp);
         speechIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_speechIconDrawable, R.drawable.ic_microphone_black_48dp);
@@ -323,8 +324,8 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
     private void setupIcons() {
         //Drawables
         //Animated Nav Icon
-        navIconResId = R.drawable.ic_menu_animated;
-        this.navIcon.setImageResource(navIconResId);
+        navIconRes = R.drawable.ic_menu_animated;
+        this.navIcon.setImageResource(navIconRes);
         setNavButtonEnabled(navButtonEnabled);
 
         //Menu
@@ -1012,7 +1013,7 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
         savedState.isSearchBarVisible = searchOpened ? VIEW_VISIBLE : VIEW_INVISIBLE;
         savedState.suggestionsVisible = suggestionsVisible ? VIEW_VISIBLE : VIEW_INVISIBLE;
         savedState.speechMode = speechMode ? VIEW_VISIBLE : VIEW_INVISIBLE;
-        savedState.navIconResId = navIconResId;
+        savedState.navIconRes = navIconRes;
         savedState.searchIconRes = searchIconRes;
         savedState.suggestions = getLastSuggestions();
         savedState.maxSuggestions = maxSuggestionCount;
@@ -1088,7 +1089,7 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
         private int suggestionsVisible;
         private int speechMode;
         private int searchIconRes;
-        private int navIconResId;
+        private int navIconRes;
         private String hint;
         private List suggestions;
         private int maxSuggestions;
@@ -1099,7 +1100,7 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
             suggestionsVisible = source.readInt();
             speechMode = source.readInt();
 
-            navIconResId = source.readInt();
+            navIconRes = source.readInt();
             searchIconRes = source.readInt();
             hint = source.readString();
             suggestions = source.readArrayList(null);
@@ -1118,7 +1119,7 @@ public class MaterialSearchBar extends FrameLayout implements View.OnClickListen
             out.writeInt(speechMode);
 
             out.writeInt(searchIconRes);
-            out.writeInt(navIconResId);
+            out.writeInt(navIconRes);
             out.writeString(hint);
             out.writeList(suggestions);
             out.writeInt(maxSuggestions);
